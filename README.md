@@ -1,1 +1,1 @@
-# rules-ru
+# Russian Riichi rules for tournaments 
