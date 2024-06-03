@@ -19,9 +19,16 @@
 \usepackage{titlesec}
 \usepackage{graphicx}
 \usepackage[document]{ragged2e}
+\usepackage{hyperref}
 \graphicspath{ {./img/} }
 \pagenumbering{arabic}
 \linespread{1.15}
+
+\hypersetup{
+	colorlinks=false,
+	linktoc=all,
+	hidelinks=true
+}
 
 \renewcommand{\arraystretch}{1.4}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
