@@ -14,6 +14,7 @@
 Steps for Linux are more or less the same, with following differences:
 - Install TexStudio from your package manager.
 - Install the whole TexLive package set from your package manager. We recommend installing everything to avoid issues with missing packages.
+    - As an option, you might try installing the packages listed in `fedora.packages.txt` - this should be enough to start.
 - Download and install fonts: Noto Serif (https://fonts.google.com/noto/specimen/Noto+Serif) and Noto Serif JP (https://fonts.google.com/noto/specimen/Noto+Serif+JP)
 - In TexStudio settings, goto Build tab, then select "LuaLaTeX" in "Default Compiler" dropdown.
 - Open `rules.tex` file in TexStudio and then select "Options" -> "Root document" -> "Set current document as explicit root"
