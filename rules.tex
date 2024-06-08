@@ -15,6 +15,16 @@
 \usepackage{enumitem}
 \usepackage{silence}
 \usepackage{pdflscape}
+\usepackage{contour}
+\usepackage{ulem}
+
+\renewcommand{\ULdepth}{1.8pt}
+\renewcommand\ULthickness{1pt}
+\contourlength{0.8pt}
+\newcommand{\lineunder}[1]{%
+	\uline{\phantom{#1}}%
+	\llap{\contour{white}{#1}}%
+}
 
 \ErrorFilter{mahjong}{Token " is not valid in MPSZ notation}
 
