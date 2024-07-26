@@ -181,11 +181,13 @@ texlive-ltxmisc
 texlive-lua-alt-getopt
 texlive-lua-uni-algos
 texlive-luabidi
+texlive-luacode
 texlive-luahbtex
 texlive-lualatex-math
 texlive-lualibs
 texlive-luaotfload
 texlive-luatex
+texlive-luaquotes
 texlive-luatexbase
 texlive-lwarp
 texlive-mahjong
