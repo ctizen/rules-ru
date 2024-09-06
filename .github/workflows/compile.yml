@@ -16,6 +16,8 @@ jobs:
         with:
           root_file: rules.tex
           latexmk_use_lualatex: true
+          extra_fonts: |
+            ./fonts/*.ttf
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
