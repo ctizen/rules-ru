@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
+      - name: Set up release date
+        run: |
+          echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
       - name: Compile LaTeX document
         uses: dante-ev/latex-action@latest
         with:
@@ -19,8 +22,13 @@ jobs:
           compiler: lualatex
           args: -synctex=1 -interaction=nonstopmode -shell-escape
           extra_font_packages: fonts
+      - name: Add new release tag
+        if: always()
+        run: |
+          git tag release-${{ env.RELEASE_DATE }} && git push origin -f refs/tags/release-${{ env.RELEASE_DATE }}
       - name: Release
         if: always()
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: release-${{ env.RELEASE_DATE }}
           files: rules.pdf
