@@ -19,8 +19,13 @@ jobs:
           compiler: lualatex
           args: -synctex=1 -interaction=nonstopmode -shell-escape
           extra_font_packages: fonts
+      - name: Add new release tag
+        if: always()
+        run: |
+          git tag release-${{ steps.date.outputs.date  }} && git push origin -f refs/tags/release-${{ steps.date.outputs.date  }}
       - name: Release
         if: always()
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: release-${{ steps.date.outputs.date  }}
           files: rules.pdf
