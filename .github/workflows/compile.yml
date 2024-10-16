@@ -7,19 +7,18 @@ on:
 
 jobs:
   build_latex:
+    name: Build LaTeX document
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
       - name: Compile LaTeX document
-        continue-on-error: true
-        uses: xu-cheng/latex-action@v3
+        uses: dante-ev/latex-action@latest
         with:
           root_file: rules.tex
-          continue_on_error: true
-          latexmk_use_lualatex: true
-          extra_fonts: |
-            ./fonts/*.ttf
+          compiler: lualatex
+          args: -synctex=1 -interaction=nonstopmode -shell-escape
+          extra_font_packages: fonts
       - name: Release
         if: always()
         uses: softprops/action-gh-release@v2
