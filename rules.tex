@@ -18,6 +18,7 @@
 \usepackage{pdflscape}
 \usepackage{contour}
 \usepackage{ulem}
+\usepackage{fancybox,fancyhdr}
 
 \renewcommand{\ULdepth}{1.8pt}
 \renewcommand\ULthickness{1pt}
@@ -39,6 +40,12 @@
 \graphicspath{ {./img/} }
 \pagenumbering{arabic}
 \linespread{1.15}
+
+\fancyhead[RO]{\colorbox{currentfancycolout}{\color{white}{\textbf{\large \thepage}}}}
+\fancyhead[LE]{\colorbox{currentfancycolout}{\color{white}{\textbf{\large \thepage}}}}
+\fancyhead[LO]{\colorbox{lightgrey}{\textbf{\thesection}}}
+\fancyhead[RE]{\colorbox{lightgrey}{\textbf{\thesection}}}
+\fancyhead[CE]{\rightmark}
 
 \hypersetup{
 	colorlinks=false,
