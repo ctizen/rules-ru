@@ -18,7 +18,7 @@ jobs:
       - name: Install TeX Live
         uses: zauguin/install-texlive@v3
         with:
-          package_file: tl_packages
+          package_file: ./.github/tl_packages
       - name: Add fonts
         run: |
           unzip fonts.zip && \
