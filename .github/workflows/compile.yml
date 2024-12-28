@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: xu-cheng/texlive-action@v2
+      - uses: xu-cheng/texlive-action@v3
         with:
           scheme: full
           extra_fonts: |
