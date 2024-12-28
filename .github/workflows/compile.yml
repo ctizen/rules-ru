@@ -15,20 +15,20 @@ jobs:
       - name: Set up release date
         run: |
           echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
-      - name: Install TeX Live
-        uses: zauguin/install-texlive@v3
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: xu-cheng/texlive-action@v2
         with:
-          package_file: ./.github/tl_packages
-      - name: Add fonts
-        run: |
-          unzip fonts.zip && \
-            mv fonts/* /usr/share/fonts/extra_fonts/ && \
-            fc-cache -fv && \
-            fc-list | sort
-      - name: First pass
-        run: lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex  
-      - name: Second pass
-        run: lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex  
+          scheme: full
+          run: |
+            unzip fonts.zip && \
+              mv fonts/* /usr/share/fonts/extra_fonts/ && \
+              fc-cache -fv && \
+              fc-list | sort
+            lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex # first pass
+            lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex # second pass
       - name: Add new release tag
         if: always()
         run: |
