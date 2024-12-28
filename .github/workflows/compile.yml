@@ -6,28 +6,23 @@ on:
       - main
 
 jobs:
-  build_latex:
-    name: Build LaTeX document
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up Git repository
-        uses: actions/checkout@v4
-      - name: Set up release date
-        run: |
-          echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
-          unzip fonts.zip
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Set up release date and fonts
+        run: |
+          echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
+          unzip fonts.zip
       - uses: xu-cheng/texlive-action@v2
         with:
           scheme: full
           run: |
-            mv ~/fonts/* /usr/share/fonts/extra_fonts/ && \
+            mkdir /usr/share/fonts/extra_fonts && \
+            mv ${GITHUB_WORKSPACE}/fonts/* /usr/share/fonts/extra_fonts/ && \
             fc-cache -fv && \
-            (lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex || return 0) && \
-            (lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex || return 0)
+            (lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex || true) && \
+            (lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex || true) # second pass to generate proper ToC
       - name: Add new release tag
         if: always()
         run: |
