@@ -15,6 +15,7 @@ jobs:
       - name: Set up release date
         run: |
           echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
+          unzip fonts.zip
   build:
     runs-on: ubuntu-latest
     steps:
@@ -22,13 +23,11 @@ jobs:
       - uses: xu-cheng/texlive-action@v2
         with:
           scheme: full
+          extra_fonts: |
+            ./fonts/*.ttf  
           run: |
-            unzip fonts.zip && \
-              mv fonts/* /usr/share/fonts/extra_fonts/ && \
-              fc-cache -fv && \
-              fc-list | sort && \
-              (lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex || return 0) && \
-              (lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex || return 0)
+            (lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex || return 0) && \
+            (lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex || return 0)
       - name: Add new release tag
         if: always()
         run: |
