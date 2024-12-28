@@ -20,12 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: xu-cheng/texlive-action@v3
+      - uses: xu-cheng/texlive-action@v2
         with:
           scheme: full
-          extra_fonts: |
-            ./fonts/*.ttf  
           run: |
+            mv ~/fonts/* /usr/share/fonts/extra_fonts/ && \
+            fc-cache -fv && \
             (lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex || return 0) && \
             (lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex || return 0)
       - name: Add new release tag
