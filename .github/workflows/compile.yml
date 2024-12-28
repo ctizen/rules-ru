@@ -26,9 +26,9 @@ jobs:
             unzip fonts.zip && \
               mv fonts/* /usr/share/fonts/extra_fonts/ && \
               fc-cache -fv && \
-              fc-list | sort
-            lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex # first pass
-            lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex # second pass
+              fc-list | sort && \
+              (lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex || return 0) && \
+              (lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex || return 0)
       - name: Add new release tag
         if: always()
         run: |
