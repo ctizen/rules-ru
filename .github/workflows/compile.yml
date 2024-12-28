@@ -15,13 +15,20 @@ jobs:
       - name: Set up release date
         run: |
           echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
-      - name: Compile LaTeX document
-        uses: dante-ev/latex-action@latest
+      - name: Install TeX Live
+        uses: zauguin/install-texlive@v3
         with:
-          root_file: rules.tex
-          compiler: lualatex
-          args: -synctex=1 -interaction=nonstopmode -shell-escape
-          extra_font_packages: fonts
+          package_file: tl_packages
+      - name: Add fonts
+        run: |
+          unzip fonts.zip && \
+            mv fonts/* /usr/share/fonts/extra_fonts/ && \
+            fc-cache -fv && \
+            fc-list | sort
+      - name: First pass
+        run: lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex  
+      - name: Second pass
+        run: lualatex -synctex=1 -interaction=nonstopmode -shell-escape rules.tex  
       - name: Add new release tag
         if: always()
         run: |
