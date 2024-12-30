@@ -1,12 +1,21 @@
-name: Build Rules PDF
+name: Build and publish Rules PDF
 on:
   workflow_dispatch:
   push:
     branches:
       - main
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   build:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,3 +42,16 @@ jobs:
         with:
           tag_name: release-${{ env.RELEASE_DATE }}
           files: rules.pdf
+      - name: Make Release Folder
+        run: |
+          mkdir _site
+          mv rules.pdf index.html _site
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site/
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
