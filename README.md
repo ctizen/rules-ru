@@ -1,32 +1,14 @@
-# Russian Riichi rules for tournaments 
+# Регламент RRC и списки ответственных лиц
 
-## Build on Mac OS
+## Структура
 
-- Download and install TexStudio (https://www.texstudio.org/)
-- Download and install MacTex (https://tug.org/mactex/mactex-download.html)
-- Download and install fonts: Noto Serif (https://fonts.google.com/noto/specimen/Noto+Serif) and Noto Serif JP (https://fonts.google.com/noto/specimen/Noto+Serif+JP)
-- In TexStudio settings, goto Build tab, then select "LuaLaTeX" in "Default Compiler" dropdown.
-- Open `rules.tex` file in TexStudio and then select "Options" -> "Root document" -> "Set current document as explicit root"
-- Run "Build and preview"!
+- Файл `rules.tex` - корневой файл для PDF-документа, в него включаются все остальные файлы.
+- Для сборки используется среда TexLive, правила написаны с использованием языка разметки LaTeX и компилятора lualatex.
+- Файл `index.html` - корневой файл для сайта. В нем должна быть ссылка на собранный файл правил (`rules.pdf`) и любые вспомогательные сведения (списки действующих судей, контакты комитета по правилам).
 
-## Build on Linux
+## Обновление правил
 
-Steps for Linux are more or less the same, with following differences:
-- Install TexStudio from your package manager.
-- Install the whole TexLive package set from your package manager. We recommend installing everything to avoid issues with missing packages.
-    - As an option, you might try installing the packages listed in `fedora.packages.txt` - this should be enough to start.
-- Download and install fonts: Noto Serif (https://fonts.google.com/noto/specimen/Noto+Serif) and Noto Serif JP (https://fonts.google.com/noto/specimen/Noto+Serif+JP)
-- In TexStudio settings, goto Build tab, then select "LuaLaTeX" in "Default Compiler" dropdown.
-- Open `rules.tex` file in TexStudio and then select "Options" -> "Root document" -> "Set current document as explicit root"
-- Run "Build and preview"!
+Для обновления следует создать новую ветку в репозитории и внести изменения. Не забудьте обновить версию правил в файле `rules.tex`, указав новую дату выпуска и увеличив номер версии. Номер версии следует менять в минорной части (после точки, например, 1.2 -> 1.3) если изменения в правилах незначительны и связаны с уточнением терминов и ситуаций. В случае, если изменения существенны, увеличить следует мажорную часть, а минорную сбросить до нуля (до точки, например, 1.1 -> 2.0).
 
-## Build on Windows
-
-- Download and install TexStudio (https://www.texstudio.org/)
-- Download and install TexLive (https://tug.org/texlive/windows.html). It's recommended to download the full ISO image to avoid downloading all packages one by one.
-- Download and install fonts: Noto Serif (https://fonts.google.com/noto/specimen/Noto+Serif) and Noto Serif JP (https://fonts.google.com/noto/specimen/Noto+Serif+JP)
-- In TexStudio settings, goto Build tab, then select "LuaLaTeX" in "Default Compiler" dropdown.
-- Open `rules.tex` file in TexStudio and then select "Options" -> "Root document" -> "Set current document as explicit root"
-- Run "Build and preview"!
-
+После того, как ветка вливается в мастер, запускается автоматическая сборка PDF-файла правил, релиз его в раздел Releases текущего репозитория и релиз файлов `index.html` и `rules.pdf` на общедоступный вебсайт (https://ru.riichimahjong.org).
 
